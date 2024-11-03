@@ -16,7 +16,7 @@ def base64_to_ascii(base64_string):
     byte_data = base64.b64decode(base64_string)
 
     # Step 2: Convert bytes to ASCII string (if the bytes are valid ASCII)
-    ascii_string = byte_data.decode('ascii')  # Ignore non-ASCII characters
+    ascii_string = byte_data.decode('ascii', errors='ignore')  # Ignore non-ASCII characters
 
     return ascii_string
 
@@ -26,7 +26,7 @@ def shift_ascii(s, shift):
         # Get the ASCII value of the character
         ascii_value = ord(char)
         # Shift the value
-        shifted_value = ascii_value + shift
+        shifted_value = ascii_value - shift
         # Convert back to character
         shifted_char = chr(shifted_value)
         shifted_string += shifted_char
@@ -36,7 +36,7 @@ def shift_ascii(s, shift):
 ciphertext = "fYZ7ipGIjFtsXpNLbHdPbXdaam1PS1c5lQ=="
 ascii_string = base64_to_ascii(ciphertext)
 print(ascii_string)
-for i in range(27):
+for i in range(25):
     result = shift_ascii(ascii_string, i)
     print(f"Shifted: {result}")
 
